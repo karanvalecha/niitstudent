@@ -44,7 +44,5 @@
     "ts-node": "~2.0.0",
     "tslint": "~4.5.0",
     "typescript": "~2.2.0"
-  },
-  "preinstall": "npm install -g http-server",
-  "postinstall": "ng build --prod"
+  }
 }
