@@ -1,0 +1,19 @@
+<div id="login-box">
+  <div class="left">
+    <h1>Log In</h1>
+    
+    <input type="text" name="username" placeholder="Username" />
+    <input type="password" name="password" placeholder="Password" />
+    
+    <input type="submit" name="signup_submit" value="Log me in" />
+  </div>
+  
+  <div class="right">
+    <span class="loginwith">Sign in with<br />social network</span>
+    
+    <button class="social-signin facebook" (click)="useGoogle()" >Log in with facebook</button>
+    <button class="social-signin twitter" (click)="useGoogle()" >Log in with Twitter</button>
+    <button class="social-signin google" (click)="loginGoogle()">Log in with Google+</button>
+  </div>
+  <div class="or">OR</div>
+</div>
