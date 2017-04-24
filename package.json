@@ -48,5 +48,6 @@
     "ts-node": "~2.0.0",
     "tslint": "~4.5.0",
     "typescript": "~2.2.0"
-  }
+  },
+  "deploy": "git push origin master && git push heroku master"
 }
