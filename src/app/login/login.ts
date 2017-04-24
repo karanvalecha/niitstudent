@@ -2,23 +2,21 @@ import { Component } from '@angular/core';
 import { Http } from '@angular/http';
 import { AngularFire } from 'angularfire2';
 
-declare var require: any
 declare var Materialize: any
-const styles   = require('../signup/signup.css');
-const template = require('./login.html');
 
 @Component({
   selector: 'login',
-  template: template,
-  styles: [ styles ]
+  styleUrls: ['../signup/signup.css'],
+  templateUrl: './login.html'
 })
 
 export class LoginComponent {
-	constructor(public af: AngularFire) {
+	constructor(public firebase: AngularFire) {
 		console.log('Hello login')
 	}
+
 	loginGoogle(){
-		console.log('hey there')
+		this.firebase.auth.login()
 	}
 
 	useGoogle(){

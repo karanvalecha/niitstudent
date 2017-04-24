@@ -1,18 +1,20 @@
 import { Component } from '@angular/core';
 import { Http } from '@angular/http';
-
-declare var require: any
-const styles   = require('./signup.css');
-const template = require('./signup.html');
+import { AngularFire } from 'angularfire2';
 
 @Component({
   selector: 'signup',
-  template: template,
-  styles: [ styles ]
+  templateUrl: './signup.html',
+  styleUrls: [ './signup.css' ]
 })
 
 export class Signup {
-	constructor() {
+	constructor(public firebase: AngularFire) {
 		console.log('sign up')
 	}
+
+	loginGoogle(){
+		this.firebase.auth.login()
+	}
+
 }

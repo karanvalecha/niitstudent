@@ -1,13 +1,9 @@
 import { Component } from '@angular/core';
 
-declare var require: any
-const style = require('./header.scss')
-const template = require('./header.html');
-
 @Component({
   selector: 'header',
-  template: template,
-  styles: [style]
+  templateUrl: './header.html',
+  styleUrls: [ './header.scss' ]
 })
 
 export class Header {

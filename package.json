@@ -10,7 +10,8 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "preinstall":   "npm install -g http-server",
-    "postinstall":  "ng build --prod"
+    "postinstall":  "ng build --prod",
+    "deploy": "git push origin master && git push heroku master"
   },
   "private": true,
   "dependencies": {
@@ -48,6 +49,5 @@
     "ts-node": "~2.0.0",
     "tslint": "~4.5.0",
     "typescript": "~2.2.0"
-  },
-  "deploy": "git push origin master && git push heroku master"
+  }
 }

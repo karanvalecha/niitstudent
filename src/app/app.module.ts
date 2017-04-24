@@ -7,6 +7,7 @@ import { AngularFireModule, AuthProviders, AuthMethods } from 'angularfire2';
 import { Signup } from './signup';
 import { Header } from './header';
 import { LoginComponent } from './login';
+import { Home } from './home';
 
 import { AppComponent } from './app.component';
 
@@ -26,7 +27,7 @@ const myFirebaseAuthConfig = {
 
 @NgModule({
   declarations: [
-    AppComponent, Signup, Header, LoginComponent
+    AppComponent, Signup, Header, LoginComponent, Home
   ],
   imports: [
     BrowserModule,
@@ -36,7 +37,7 @@ const myFirebaseAuthConfig = {
     RouterModule.forRoot([
       {
         path: '',
-        redirectTo: '/login',
+        redirectTo: '/home',
         pathMatch: 'full'
       },
       {
@@ -46,6 +47,10 @@ const myFirebaseAuthConfig = {
       {
         path: 'signup',
         component: Signup
+      },
+      {
+        path: 'home',
+        component: Home
       }
     ])
   ],
