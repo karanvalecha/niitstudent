@@ -8,6 +8,7 @@ import { Signup } from './signup';
 import { Header } from './header';
 import { LoginComponent } from './login';
 import { Home } from './home';
+import { Landing } from './landing';
 
 import { AppComponent } from './app.component';
 
@@ -27,7 +28,7 @@ const myFirebaseAuthConfig = {
 
 @NgModule({
   declarations: [
-    AppComponent, Signup, Header, LoginComponent, Home
+    AppComponent, Signup, Header, LoginComponent, Home, Landing
   ],
   imports: [
     BrowserModule,
@@ -37,7 +38,7 @@ const myFirebaseAuthConfig = {
     RouterModule.forRoot([
       {
         path: '',
-        redirectTo: '/home',
+        redirectTo: '/landing',
         pathMatch: 'full'
       },
       {
@@ -51,6 +52,10 @@ const myFirebaseAuthConfig = {
       {
         path: 'home',
         component: Home
+      },
+      {
+        path: 'landing',
+        component: Landing
       }
     ])
   ],
