@@ -9,12 +9,13 @@ export class LoginHelper implements OnInit, OnDestroy {
 	af_sub: any
 	router: Router;
 	constructor(public firebase: AngularFire, router: Router) {
-		this.router = router
+		this.firebase = firebase;
+		this.router = router;
 	}
 
 	ngOnInit() {
-		this.af_sub = this.firebase.auth.subscribe(auth => {
-			this.user = auth && auth.google;
+		this.af_sub = this.firebase.auth.subscribe(snapshot => {
+			this.user = snapshot && snapshot.auth
 			if(this.user) {
 				this.router.navigateByUrl('/home');
 			}
@@ -27,6 +28,7 @@ export class LoginHelper implements OnInit, OnDestroy {
 
 	loginGoogle(){
 		this.firebase.auth.login().then((af) => {
+			this.user = af.auth;
 			Materialize.toast(`Welcome ${this.user.displayName}`, 2000)
 		})
 	}
