@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { Http } from '@angular/http';
+import { Router } from '@angular/router'
 import { AngularFire } from 'angularfire2';
+import { LoginHelper } from '../helpers';
 
 declare var Materialize: any
 
@@ -10,17 +12,8 @@ declare var Materialize: any
   templateUrl: './login.html'
 })
 
-export class LoginComponent {
-	constructor(public firebase: AngularFire) {
-		console.log('Hello login')
+export class LoginComponent extends LoginHelper {
+	constructor(af: AngularFire, router: Router) {
+		super(af, router)
 	}
-
-	loginGoogle(){
-		this.firebase.auth.login()
-	}
-
-	useGoogle(){
-		Materialize.toast('Coming Soon!', 1000)
-	}
-
 }

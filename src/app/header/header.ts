@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, AfterViewInit } from '@angular/core';
+declare const $:any;
 
 @Component({
   selector: 'header',
@@ -6,8 +7,13 @@ import { Component } from '@angular/core';
   styleUrls: [ './header.scss' ]
 })
 
-export class Header {
+export class Header implements AfterViewInit{
 	constructor() {
 		console.log('Header here')
+	}
+	ngAfterViewInit() {
+		setTimeout( () => {
+			$(".button-collapse").sideNav()
+		}, 500)
 	}
 }

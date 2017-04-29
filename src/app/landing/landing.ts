@@ -10,6 +10,6 @@ export class Landing {
 	constructor(private router:Router) {
 		setTimeout(function(){
 			this.router.navigateByUrl('/home');
-		}.bind(this), 3100)
+		}.bind(this), 3400)
 	}
 }
