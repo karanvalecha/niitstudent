@@ -1,19 +1,18 @@
 import { Component } from '@angular/core';
-import { AngularFire, AngularFireAuth } from 'angularfire2';
-import { Router } from '@angular/router'
 import { LoginHelper } from '../../helpers';
 
 declare const $:any;
 @Component({
   selector: 'login_links',
   templateUrl: './nav_links.html',
-  styleUrls: [ '../header.scss' ]
+  styleUrls: [ '../header.scss', './nav_styles.scss' ]
 })
 
-export class NavLinksComponent extends LoginHelper {
-	constructor(firebase: AngularFire, router: Router) {
-		super(firebase, router)
+export class NavLinksComponent {
+	login_helper: any;
+	constructor(lh: LoginHelper) {
 		console.log('nav link')
+		this.login_helper = lh;
 	}
 
 	navLinkClicked() {

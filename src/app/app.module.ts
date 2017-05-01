@@ -10,6 +10,9 @@ import { LoginComponent } from './login';
 import { Home } from './home';
 import { NavLinksComponent } from './header/no_user_nav_links';
 import { Landing } from './landing';
+import { BlogComponent } from './blog';
+import { LoginHelper } from './helpers';
+import { ProfileComponent } from './profile';
 
 import { AppComponent } from './app.component';
 
@@ -29,7 +32,8 @@ const myFirebaseAuthConfig = {
 
 @NgModule({
   declarations: [
-    AppComponent, Signup, Header, LoginComponent, Home, Landing, NavLinksComponent
+    AppComponent, Signup, Header, LoginComponent, Home, Landing,
+     NavLinksComponent, BlogComponent, ProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -58,9 +62,18 @@ const myFirebaseAuthConfig = {
       {
         path: 'landing',
         component: Landing
+      },
+      {
+        path: 'blog',
+        component: BlogComponent
+      },
+      {
+        path: 'profile',
+        component: ProfileComponent
       }
     ])
   ],
+  providers: [LoginHelper],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

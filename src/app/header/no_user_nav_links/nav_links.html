@@ -1,12 +1,12 @@
-<div *ngIf="!user">
+<div *ngIf="!(login_helper.user)">
 	<li (click)="navLinkClicked()" routerLinkActive="active"><a routerLink="/home">Home</a></li>
 	<li (click)="navLinkClicked()" routerLinkActive="active"><a routerLink="/signup">Sign Up</a></li>
 	<li (click)="navLinkClicked()" routerLinkActive="active"><a routerLink="/login">Login</a></li>
 </div>
-<div *ngIf="user">
-	<li (click)="navLinkClicked()" routerLinkActive="active"><a routerLink="/blogs">Blogs</a></li>
-	<li (click)="logOut()"><a class="chip">
-    <img src={{user.photoURL}} alt="Contact Person">
-    Log Out
+<div *ngIf="(login_helper.user)">
+	<li (click)="navLinkClicked()" routerLinkActive="active"><a routerLink="/blog">Blogs</a></li>
+   <li class="profile" title="Profile" > <a routerLink="/profile"><img src={{login_helper.user.photoURL}} class="circle"> </a></li>
+	<li (click)="login_helper.logOut()"><a class="chip">
+    <span class="red-text"> Log Out </span>
   </a></li>
 </div>

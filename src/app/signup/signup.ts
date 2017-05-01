@@ -1,7 +1,4 @@
 import { Component } from '@angular/core';
-import { Http } from '@angular/http';
-import { AngularFire } from 'angularfire2';
-import { Router } from '@angular/router';
 import { LoginHelper } from '../helpers';
 
 @Component({
@@ -10,10 +7,12 @@ import { LoginHelper } from '../helpers';
   styleUrls: [ './signup.css' ]
 })
 
-export class Signup extends LoginHelper {
-	constructor(firebase: AngularFire, router: Router) {
-		super(firebase, router)
-		console.log('sign up')
+export class Signup {
+	user: any;
+	login_helper: any;
+	constructor(lh: LoginHelper) {
+		this.login_helper = lh;
+		this.user = lh.user;
 	}
 
 }

@@ -3,18 +3,18 @@
     <div class="left">
       <h1>Log In</h1>
       
-      <input (click)="useGoogle()" type="text" name="username" placeholder="Username" />
-      <input (click)="useGoogle()" type="password" name="password" placeholder="Password" />
+      <input (click)="login_helper.useGoogle()" type="text" name="username" placeholder="Username" />
+      <input (click)="login_helper.useGoogle()" type="password" name="password" placeholder="Password" />
       
-      <input type="submit" (click)="useGoogle()" name="signup_submit" value="Log me in" />
+      <input type="submit" (click)="login_helper.useGoogle()" name="signup_submit" value="Log me in" />
     </div>
     
     <div class="right">
       <span class="loginwith">Sign in with<br />social network</span>
       
-      <button class="social-signin facebook" (click)="useGoogle()" >Log in with facebook</button>
-      <button class="social-signin twitter" (click)="useGoogle()" >Log in with Twitter</button>
-      <button class="social-signin google" (click)="loginGoogle()">Log in with Google+</button>
+      <button class="social-signin facebook" (click)="login_helper.useGoogle()" >Log in with facebook</button>
+      <button class="social-signin twitter" (click)="login_helper.useGoogle()" >Log in with Twitter</button>
+      <button class="social-signin google" (click)="login_helper.loginGoogle()">Log in with Google+</button>
     </div>
     <div class="or">OR</div>
   </div>

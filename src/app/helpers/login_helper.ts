@@ -1,44 +1,49 @@
-import { OnInit, OnDestroy } from '@angular/core'
+import { Injectable } from '@angular/core'
 import { AngularFire } from 'angularfire2';
 import { Router } from '@angular/router';
 
 declare var Materialize: any
 
-export class LoginHelper implements OnInit, OnDestroy {
+@Injectable()
+export class LoginHelper {
 	user: any
-	af_sub: any
 	router: Router;
 	constructor(public firebase: AngularFire, router: Router) {
+		this.user = JSON.parse(localStorage.getItem('user'))
 		this.firebase = firebase;
 		this.router = router;
+		this.setUser()
 	}
 
-	ngOnInit() {
-		this.af_sub = this.firebase.auth.subscribe(snapshot => {
-			this.user = snapshot && snapshot.auth
-			if(this.user) {
-				this.router.navigateByUrl('/home');
-			}
-		});
-	}
-
-	ngOnDestroy() {
-		this.af_sub.unsubscribe();
+	setUser(){
+		this.firebase.auth.subscribe((snapshot) => {
+			this.user = snapshot && snapshot.auth;
+			localStorage.setItem('user', JSON.stringify(this.user))
+		})
 	}
 
 	loginGoogle(){
 		this.firebase.auth.login().then((af) => {
 			this.user = af.auth;
+			if(this.user) {
+				this.router.navigateByUrl('/home');
+			}
 			Materialize.toast(`Welcome ${this.user.displayName}`, 2000)
+			const {email, photoURL, displayName} = this.user
+			this.updateUserData({email, photoURL, displayName})
 		})
+	}
+	updateUserData(data: {}) {
+		this.firebase.database.object(`/users/${this.user.uid}`).update(data)
 	}
 
 	logOut(){
 		var func = () => {
 			Materialize.toast(`Bye ${this.user.displayName}`, 2000)
-			this.user = null;
+			this.router.navigateByUrl('/home');
 		}
 		this.firebase.auth.logout().then(func)
+		localStorage.removeItem('user')
 	}
 
 	useGoogle(){
