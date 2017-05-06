@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Observable } from 'rxjs'
 import { AngularFire } from 'angularfire2';
+import * as firebase from 'firebase';
 import { LoginHelper } from '../helpers';
 
 declare const $:any;
@@ -27,6 +28,7 @@ export class BlogComponent implements OnInit {
 	user: any
 	login_helper: LoginHelper
 	firebase: AngularFire
+	created_at: any
 
 	constructor(lh: LoginHelper, af: AngularFire) {
 		this.login_helper = lh;
@@ -35,7 +37,7 @@ export class BlogComponent implements OnInit {
 	}
 
 	ngOnInit() {
-		this.firebase.database.list('/articles').subscribe(items => {
+		this.firebase.database.list('/articles', {query: {orderByChild: 'created_at'}}).subscribe(items => {
 			this.articles = items.map(article => {
 				article.likes = article.likes || []
 				article.liked = () => {
@@ -55,18 +57,26 @@ export class BlogComponent implements OnInit {
 								Materialize.toast('unliked', 1000)
 							}
 						}
-					} else {
-							ref.push(this.login_helper.user.uid)
-							Materialize.toast('liked', 1000)
-						}
 					}
-					article.likeCount = Object.keys(article.likes).length
-					return article;
+					else {
+						ref.push(this.login_helper.user.uid)
+						Materialize.toast('liked', 1000)
+					}
 				}
-			)
+				article.likeCount = Object.keys(article.likes).length
+
+				this.firebase.database.list('/users').subscribe(users => {
+					article.likers = users.filter(user => {
+						return (<any>Object).values(article.likes).indexOf(user.$key) >= 0
+					})
+				})
+				article.created = new Date(article.created_at).toLocaleString()
+				return article;
+			}).reverse()
 		})
 		this.blog = {
-			uid: this.login_helper.user.uid
+			created_at: firebase.database['ServerValue']['TIMESTAMP'],
+			uid: this.currentUser().uid
 		}
 	}
 
@@ -74,7 +84,8 @@ export class BlogComponent implements OnInit {
 		this.firebase.database.list(`/articles`).push(this.blog).then(() => {
 			Materialize.toast('Blog created', 1000)
 		})
-		this.blog = {}
+		this.blog['title']=''
+		this.blog['content']=''
 	}
 
 	deleteBlog(id){
@@ -85,5 +96,15 @@ export class BlogComponent implements OnInit {
 
 	creator(id) {
 		return this.firebase.database.object(`/users/${id}`).subscribe( data => data)
+	}
+
+	currentUser() {
+		return this.login_helper.user
+	}
+
+	toolTipIt() {
+		setTimeout(() => {
+			$('.tooltipped').tooltip();
+		}, 1000);
 	}
 }

@@ -1,0 +1,11 @@
+<!-- Modal Structure -->
+<div id={{id}} class="modal modal-fixed-footer">
+  <div class="modal-content">
+  	<div *ngFor="let liker of users">
+  	<profile [user]="liker" [small_size]="true"></profile>
+  	</div>
+  </div>
+  <div class="modal-footer">
+    <a class="modal-action modal-close waves-effect waves-blue btn-flat ">Close</a>
+  </div>
+</div>

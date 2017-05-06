@@ -10,11 +10,12 @@
 			<div class="input-field col s10">
 			  <textarea [(ngModel)]="blog['content']" name="blog-content" id="address" class="materialize-textarea" data-length="500"></textarea>
 			  <label>What would you like to share?</label>
-				  <input type="hidden" [ngModel]="blog['uid']" name="blog-creator" />
+				 <input type="hidden" [ngModel]="blog['uid']" name="blog-creator" [value]="currentUser().uid" />
+				 <input type="hidden" [ngModel]="blog['created_at']" name="blog-created-at" />
 		</div>
 		<div class="col s2">
 			<button (click)="saveBlog()" class="btn waves-effect waves-light" type="submit" name="action">
-			  <i class="material-icons">send</i>
+			  <i class="material-icons large">send</i>
 			</button>
 		</div>
 		</div>
@@ -32,19 +33,31 @@
       <div class="card-content gray-4">
         <a class="btn-floating right {{article.uid != login_helper.user.uid ? 'disabled' : ''}} red" (click)="deleteBlog(article.$key)"> <i class="material-icons">delete</i></a>
         <span class="card-title">
-        <div class="chip right">
-	        <img style="height: 30px" [src]="(article.creator | async)?.photoURL" class="circle responsive-img left"/>
-        	{{(article.creator | async)?.displayName}}
+        <div class="chip right tooltipped" [title]="(article.creator | async)?.displayName">
+	        <img style="height: 30px" [src]="(article.creator | async)?.photoURL" class="circle responsive-img left" [alt]="(article.creator | async)?.displayName"/>
+	        {{(article.creator | async)?.displayName}}<br>{{article.created}}
         </div>
 	        {{article.title}}
         </span>
-        {{article.content}}
-        <blockquote>{{article.likeCount}} Likes</blockquote>
+        <span class="flow-text">
+        	{{article.content}}
+      	</span>
+        <blockquote *ngIf="article.likeCount" (click)="showModal"> <a class="modal-trigger btn-link" href="#{{article.$key}}">{{article.likeCount}} Likes</a></blockquote>
+        <likers id={{article.$key}} [users]="article.likers"></likers>
       </div>
       <div class="card-acton">
         <a class="btn-floating {{article.liked() ? 'blue' : 'black'}} halfway-fab right" (click)="article.likeOrUnlike()" [title]="article.liked() ? 'Unlike' : 'Like'"> <i class="material-icons">thumb_up</i></a>
       </div>
+      <div class="card-action">
+	      <form class="row">
+	      	<span class="col s1">
+			      <img style="height: 50px" [src]="currentUser().photoURL" class="circle responsive-img"/>
+		      </span>
+		      <span class="col s11 right">
+		      	<input type="text" placeholder="Add your comment"/>
+		      </span>	
+	      </form>
+      </div>
     </div>
   </div>
 </div>
-      

@@ -13,6 +13,7 @@ import { Landing } from './landing';
 import { BlogComponent } from './blog';
 import { LoginHelper } from './helpers';
 import { ProfileComponent } from './profile';
+import {LikerComponent} from './likers';
 
 import { AppComponent } from './app.component';
 
@@ -33,7 +34,7 @@ const myFirebaseAuthConfig = {
 @NgModule({
   declarations: [
     AppComponent, Signup, Header, LoginComponent, Home, Landing,
-     NavLinksComponent, BlogComponent, ProfileComponent
+     NavLinksComponent, BlogComponent, ProfileComponent, LikerComponent
   ],
   imports: [
     BrowserModule,
